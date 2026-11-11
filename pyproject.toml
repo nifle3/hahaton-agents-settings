@@ -1,0 +1,44 @@
+# Настройки ruff (линтер + форматтер) и mypy (тайпчекер) для Python.
+# Вставляйте эти секции в pyproject.toml вашего проекта
+# или используйте файл как есть (секция [project] добавляется вами).
+
+# --- Линтер и форматтер -----------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["venv", ".venv", "migrations"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort (порядок импортов)
+    "UP",  # pyupgrade (современный синтаксис)
+    "B",   # flake8-bugbear (частые баги)
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+    "RUF", # правила самого ruff
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [] # при копировании впишите имя вашего пакета
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# --- Тайпчекер --------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.11"
+# Разумный базовый профиль: строго, но без полного --strict;
+# усиливайте постепенно (см. mypy --strict).
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+disallow_untyped_defs = false   # включите по мере покрытия аннотациями
+ignore_missing_imports = true   # ослабьте, когда появятся stubs

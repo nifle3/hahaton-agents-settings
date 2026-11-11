@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/QwenLM/qwen-code/main/docs/schemas/settings-schema.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "write_file|replace|edit",
+        "hooks": [
+          {
+            "type": "command",
+            "name": "agent-hook-format",
+            "command": "\"$QWEN_PROJECT_DIR/agent-hook.sh\"",
+            "timeout": 30,
+            "async": false,
+            "statusMessage": "Форматирование после правки"
+          }
+        ]
+      }
+    ]
+  }
+}

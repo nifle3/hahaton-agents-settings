@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Хук «после правки файла агентом»: все write/edit/patch проходят
+  // через общий хаб agent-hook.sh (формат/линт по расширению).
+  // Встроенные форматтеры отключены, чтобы не дублировать его работу.
+  "formatter": {
+    "agent-hook": {
+      "command": ["./agent-hook.sh", "format", "$FILE"],
+      "extensions": [".go", ".py", ".pyi", ".ts", ".tsx", ".mts", ".cts", ".js", ".jsx", ".mjs", ".cjs"]
+    },
+    "gofmt": { "disabled": true },
+    "ruff": { "disabled": true },
+    "prettier": { "disabled": true },
+    "oxfmt": { "disabled": true }
+  },
+  // Перехват действий агента: чувствительные операции требуют подтверждения.
+  "permissions": [
+    { "action": "shell", "resource": "git push*", "effect": "ask" },
+    { "action": "shell", "resource": "rm -rf*", "effect": "ask" },
+    { "action": "edit", "resource": "**/.env*", "effect": "deny" },
+    { "action": "edit", "resource": "**/vendor/**", "effect": "deny" },
+    { "action": "edit", "resource": "**/node_modules/**", "effect": "deny" }
+  ]
+}

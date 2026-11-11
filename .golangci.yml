@@ -1,0 +1,36 @@
+# golangci-lint v2 — линтер + тайпчек для Go.
+# Компиляторный typecheck и go vet входят в набор по умолчанию
+# (govet/staticcheck покрывают обе проверки).
+# Документация: https://golangci-lint.run/usage/configuration/
+
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  default: none
+  enable:
+    # Базовый набор: компиляторный typecheck, vet, неиспользуемый код
+    - errcheck        # необработанные ошибки
+    - govet           # go vet + typecheck
+    - unused          # неиспользуемые функции/переменные
+    - ineffassign     # бесполезные присваивания
+    - staticcheck     # набор статических проверок (включая typecheck-пассы)
+    # Дополнительные
+    - revive          # замена golint: стилистические правила
+    - misspell        # опечатки в комментариях/строках
+    - unconvert       # лишние преобразования типов
+    - copyloopvar     # лишние копии переменной цикла (Go 1.22+)
+
+  settings:
+    revive:
+      rules:
+        - name: exported          # комментарии у экспортируемых символов
+        - name: var-naming
+        - name: indent-error-flow
+        - name: error-strings
+
+formatters:
+  enable:
+    - gofmt

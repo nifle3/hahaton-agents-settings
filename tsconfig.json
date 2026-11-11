@@ -1,0 +1,27 @@
+{
+  // Строгий тайпчек TypeScript. Файл рассчитан на копирование в проект:
+  // при необходимости добавьте свои "paths", "types", "lib".
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM"],
+
+    // Строгий режим и защитные опции
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": false, // включите, когда код к этому готов
+
+    // Тайпчек без сборки: make typecheck-ts => tsc --noEmit
+    "noEmit": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
+  "exclude": ["node_modules", "dist", "build", "coverage", "vendor"]
+}

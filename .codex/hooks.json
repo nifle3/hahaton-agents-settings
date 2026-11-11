@@ -1,0 +1,18 @@
+{
+  "description": "Общие агент-хуки: форматирование и линт после правок файлов (см. agent-hook.sh)",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "(?i)edit|write|patch|str_replace|apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./agent-hook.sh",
+            "timeout": 30,
+            "statusMessage": "Форматирование после правки"
+          }
+        ]
+      }
+    ]
+  }
+}
